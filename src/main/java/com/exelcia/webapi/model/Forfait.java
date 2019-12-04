@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -33,11 +34,13 @@ public class Forfait implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotBlank
+	@NotNull
 	private Float prix;
 	
+	@NotBlank
 	private String libelle;
 	
+	@NotBlank
 	private String typeClient;
 	
 	@Column(nullable = false, updatable = false)
