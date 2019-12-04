@@ -19,6 +19,10 @@ import com.exelcia.webapi.exceptions.ResourceNotFoundException;
 import com.exelcia.webapi.model.Forfait;
 import com.exelcia.webapi.repository.ForfaitRepository;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/api")
 public class ForfaitController {
@@ -30,10 +34,15 @@ public class ForfaitController {
 	//@GetMapping(value = "/forfaits", params = "1")
 	//@GetMapping(value = "/forfaits", headers = "X-API-VERSION=1")
 	@GetMapping(value = "/forfaits")
+	@ApiOperation(value="Récupère tous les forfaits", response = List.class)
 	public List<Forfait> getAllForfait(){
 		return repo.findAll();
 	}
 	
+	@ApiOperation(value="Récupère un forfait par ID", response = Forfait.class)
+	@ApiResponses(value= {
+			@ApiResponse(code=404, message = "Pas de forfait pour cet ID")
+	})
 	@GetMapping("/forfaits/{id}")
 	public Forfait getForfaitById(@PathVariable(value="id")Long forfaitId) {
 		

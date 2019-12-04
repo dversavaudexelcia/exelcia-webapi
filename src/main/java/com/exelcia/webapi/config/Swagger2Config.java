@@ -1,7 +1,6 @@
 package com.exelcia.webapi.config;
 
 import static springfox.documentation.builders.PathSelectors.regex;
-import java.util.Collections;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
