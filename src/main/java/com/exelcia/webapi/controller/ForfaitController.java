@@ -41,7 +41,7 @@ public class ForfaitController {
 				() -> new ResourceNotFoundException("Forfait", "id", forfaitId));
 	}
 	
-	@PostMapping("/Forfaits")
+	@PostMapping("/forfaits")
 	public Forfait createForfait(@Valid @RequestBody Forfait forfait) {
 		return repo.save(forfait);
 	}
