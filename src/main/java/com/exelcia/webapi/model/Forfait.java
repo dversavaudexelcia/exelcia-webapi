@@ -33,8 +33,8 @@ public class Forfait implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotNull
-	private float prix;
+	@NotBlank
+	private Float prix;
 	
 	private String libelle;
 	
@@ -62,7 +62,7 @@ public class Forfait implements Serializable {
 		return prix;
 	}
 
-	public void setPrix(float prix) {
+	public void setPrix(Float prix) {
 		this.prix = prix;
 	}
 
