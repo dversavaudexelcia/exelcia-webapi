@@ -62,6 +62,20 @@ public class User implements UserDetails, Serializable {
 	}
 
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public User(@NotBlank @Size(max = 40) String name, @NotBlank @Size(max = 40) String email,
+			@NotBlank @Size(max = 15) String username) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.username = username;
+	}
+
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
