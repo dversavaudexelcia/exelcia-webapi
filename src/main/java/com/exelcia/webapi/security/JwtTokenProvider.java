@@ -25,7 +25,7 @@ public class JwtTokenProvider {
 	public String generateToken(Authentication authentication) {
 		User user =  (User)authentication.getPrincipal();
 			
-		Date expireDate = new Date(System.currentTimeMillis() +expiration );
+		Date expireDate = new Date(System.currentTimeMillis() +expiration * 1000 );
 		
 		return Jwts.builder()
 				.setSubject(Long.toString(user.getId()))
