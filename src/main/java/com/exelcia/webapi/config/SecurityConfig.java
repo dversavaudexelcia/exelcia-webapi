@@ -18,8 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.exelcia.webapi.security.JwtAuthenticationEntryPoint;
 import com.exelcia.webapi.security.JwtAuthenticationFilter;
-
-import exelcia.webapi.services.UserAuthService;
+import com.exelcia.webapi.service.UserAuthService;
 
 
 @Configuration
@@ -28,9 +27,7 @@ import exelcia.webapi.services.UserAuthService;
 		securedEnabled = true,
 		jsr250Enabled = true,
 		prePostEnabled = true)
-
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
 	@Autowired
 	private JwtAuthenticationEntryPoint unAuthorizeHandler;
 	
@@ -39,11 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	
 	@Bean
-	public JwtAuthenticationFilter filter () {
+	public JwtAuthenticationFilter filter() {
 		return new JwtAuthenticationFilter();
-	
 	}
-
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -58,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		//auth.user
 		auth.userDetailsService(userAuth).passwordEncoder(passwordEncoder());
 	}
 
@@ -75,19 +72,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.authorizeRequests()
 				.antMatchers("/",
-						"/**/*.html", 
-						"/**/*.js", 
-						"/**/*.css"
-						).permitAll()
+						"/**/*.html",
+						"/**/*.css",
+						"/**/*.js",
+						"/swagger-resources/**",
+						"/swagger-ui.html",
+						"/v2/api-docs",
+						"/webjars/**").permitAll()
 				.antMatchers("/api/auth/**").permitAll()
-				.antMatchers(HttpMethod.GET, "/api/forfaits").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/forfaits/**").permitAll()
 				.anyRequest().authenticated();
+						
 		http.addFilterBefore(filter(), UsernamePasswordAuthenticationFilter.class);
 	}
+	
+	
+	
 
-
-	
-	
-	
 }
-

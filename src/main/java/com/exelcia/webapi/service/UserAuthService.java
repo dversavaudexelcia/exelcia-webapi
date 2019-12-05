@@ -1,4 +1,4 @@
-package exelcia.webapi.services;
+package com.exelcia.webapi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,10 +20,11 @@ public class UserAuthService implements UserDetailsService {
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-		User user = repo.findUserByUsername(username).orElseThrow(
-		() -> new ResourceNotFoundException("user not found", "", username));
-		return user;
+		
+		User user = repo.findUserByUsername(username) .orElseThrow(() ->
+			new ResourceNotFoundException("user not found", "", username));
+			
+		return user;	
 		
 	}
 
