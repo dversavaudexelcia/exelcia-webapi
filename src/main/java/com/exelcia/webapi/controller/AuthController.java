@@ -1,5 +1,7 @@
 package com.exelcia.webapi.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,7 +53,7 @@ public class AuthController {
 	@Autowired
 	JwtTokenProvider tokenProvider;
 	
-	@PostMapping("signin")
+	@PostMapping("/signin")
 	@ApiOperation(value="Authentification, retourne un token signé", response = String.class)
 	@ApiResponses(value= {
 			@ApiResponse(code=404, message = "Erreur login/mot de passe")
@@ -68,10 +71,13 @@ public class AuthController {
 				
 	}
 	
-	@GetMapping("signout")
+	@GetMapping("/signout")
 	@ApiOperation(value="Déconnecte l'utilisateur")
-	public ResponseEntity<?> signout(@CurrentUser User currentUser){
-		return null;
+	public ResponseEntity<?> signout(/*@CurrentUser User currentUser,*/ HttpServletRequest req, HttpServletResponse resp){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		new SecurityContextLogoutHandler().logout(req, resp, auth);
+		return ResponseEntity.ok().build();
+		
 	}
 	
 }
