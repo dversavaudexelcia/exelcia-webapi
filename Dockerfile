@@ -121,5 +121,5 @@ RUN set -e \
 		exit 1; \
 	fi
 
-EXPOSE 9000
+EXPOSE 8080
 CMD ["catalina.sh", "run"]
