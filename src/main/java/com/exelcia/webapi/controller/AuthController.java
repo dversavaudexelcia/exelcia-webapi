@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.exelcia.webapi.exceptions.ResourceNotFoundException;
-import com.exelcia.webapi.model.Forfait;
 import com.exelcia.webapi.model.Role;
 import com.exelcia.webapi.model.RoleName;
 import com.exelcia.webapi.model.User;
@@ -33,14 +31,12 @@ import com.exelcia.webapi.payload.SignupRequest;
 import com.exelcia.webapi.payload.SigninRequest;
 import com.exelcia.webapi.repository.RoleRepository;
 import com.exelcia.webapi.repository.UserRepository;
-import com.exelcia.webapi.security.CurrentUser;
 import com.exelcia.webapi.security.JwtTokenProvider;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import io.swagger.models.Response;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -107,7 +103,7 @@ public class AuthController {
 		});
 		
 		user.setRoles(Collections.singleton(role));
-		User resultat = repoUser.save(user);
+		//User resultat = repoUser.save(user);
 		
 		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/").build().toUri();
 		return ResponseEntity.created(location).body("Utilisateur créé");

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.exelcia.webapi.model.Role;
 import com.exelcia.webapi.model.RoleName;
-import com.exelcia.webapi.model.User;
+
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
